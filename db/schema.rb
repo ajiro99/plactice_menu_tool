@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170215124207) do
+ActiveRecord::Schema.define(version: 20170312075854) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",        null: false
@@ -19,5 +19,19 @@ ActiveRecord::Schema.define(version: 20170215124207) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "practice_contents", force: :cascade do |t|
+    t.integer  "category_id",                null: false
+    t.string   "practice_name",              null: false
+    t.string   "head_count"
+    t.string   "estimated_time"
+    t.text     "content"
+    t.integer  "strength",       default: 0
+    t.string   "url"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "practice_contents", ["category_id"], name: "index_practice_contents_on_category_id"
 
 end

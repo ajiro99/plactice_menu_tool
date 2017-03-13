@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category_id: 
+  practice_name: MyString
+  head_count: MyString
+  estimated_time: 1
+  content: MyText
+  strength: 1
+  url: MyString
+
+two:
+  category_id: 
+  practice_name: MyString
+  head_count: MyString
+  estimated_time: 1
+  content: MyText
+  strength: 1
+  url: MyString
