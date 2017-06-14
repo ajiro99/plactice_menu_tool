@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  practice_schedule_id: 
+  practice_content_id: 
+  order: 1
+  time: 1
+
+two:
+  practice_schedule_id: 
+  practice_content_id: 
+  order: 1
+  time: 1

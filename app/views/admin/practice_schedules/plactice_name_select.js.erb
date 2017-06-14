@@ -1,0 +1,3 @@
+$("#estimated_time_" + <%= @index %>).text("<%= @plactice_detail.estimated_time %>");
+$("#head_count_" + <%= @index %>).text("<%= @plactice_detail.head_count %>");
+$("#concept_" + <%= @index %>).val("<%= escape_javascript(@plactice_detail.concept) %>");

@@ -4,7 +4,18 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :categories
     resources :practice_contents
-    root to: "categories#index"
+    resources :practice_schedules do
+      member do
+        get 'category_select'
+        get 'plactice_name_select'
+      end
+
+      collection do
+        get 'category_select'
+        get 'plactice_name_select'
+      end
+    end
+    root to: "practice_schedules#index"
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

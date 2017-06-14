@@ -6,6 +6,10 @@ class BelongsToField < Administrate::Field::Associative
     data
   end
 
+  def to_name
+    associated_class.find(data.id).name
+  end
+
   def self.permitted_attribute(attr) 
     :"#{attr}_id"
   end

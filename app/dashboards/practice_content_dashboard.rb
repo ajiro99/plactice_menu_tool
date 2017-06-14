@@ -13,8 +13,10 @@ class PracticeContentDashboard < Administrate::BaseDashboard
     practice_name: Field::String,
     head_count: Field::String,
     estimated_time: Field::String,
-    content: Field::Text,
-    strength: Field::Number,
+    concept: Field::Text,
+    rule: Field::Text,
+    remarks: Field::Text,
+    strength: RangeField,
     url: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -31,20 +33,20 @@ class PracticeContentDashboard < Administrate::BaseDashboard
     :practice_name,
     :head_count,
     :estimated_time,
-    :content,
+    :concept,
     :strength,
-    :url,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :category,
-    :id,
     :practice_name,
     :head_count,
     :estimated_time,
-    :content,
+    :concept,
+    :rule,
+    :remarks,
     :strength,
     :url,
     :created_at,
@@ -59,7 +61,9 @@ class PracticeContentDashboard < Administrate::BaseDashboard
     :practice_name,
     :head_count,
     :estimated_time,
-    :content,
+    :concept,
+    :rule,
+    :remarks,
     :strength,
     :url,
   ].freeze
@@ -67,7 +71,7 @@ class PracticeContentDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how practice contents are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(practice_content)
-  #   "PracticeContent ##{practice_content.id}"
-  # end
+  def display_resource(practice_content)
+    "PracticeContent ID:#{practice_content.id}"
+  end
 end

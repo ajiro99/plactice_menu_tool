@@ -1,0 +1,154 @@
+<%#
+# Form Partial
+
+This partial is rendered on a resource's `new` and `edit` pages,
+and renders all form fields for a resource's editable attributes.
+
+## Local variables:
+
+- `page`:
+  An instance of [Administrate::Page::Form][1].
+  Contains helper methods to display a form,
+  and knows which attributes should be displayed in the resource's form.
+
+[1]: http://www.rubydoc.info/gems/administrate/Administrate/Page/Form
+%>
+<%= form_for([namespace, page.resource], html: { class: "form" }) do |f| %>
+  <% if page.resource.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(page.resource.errors.count, "error") %>
+        prohibited this <%= page.resource_name %> from being saved:
+      </h2>
+
+      <ul>
+        <% page.resource.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% elsif @practice_menu_set.present? && @practice_menu_set.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@practice_menu_set.errors.count, "error") %>
+          prohibited this Practice Menu from being saved:
+        </h2>
+
+        <ul>
+          <% @practice_menu_set.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end%>
+
+  <% page.attributes.each do |attribute| -%>
+    <div class="field-unit field-unit--<%= attribute.html_class %>">
+      <%= render_field attribute, f: f %>
+    </div>
+  <% end -%>
+
+  <table id="plactice_menu_table" class="collection-data" aria-labelledby="page-title">
+    <thead>
+      <tr>
+        <th width="4%">
+          No
+        </th>
+        <th width="7%">
+          Time
+        </th>
+        <th width="14%">
+          Category
+        </th>
+        <th width="14%">
+          Practice Name
+        </th>
+        <th width="14%">
+          Estimated Time
+        </th>
+        <th width="14%">
+          Head Count
+        </th>
+        <th width="30%">
+          Concept
+        </th>
+        <th width="3%">
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody id="sortable">
+      <tr id='row_0'>
+        <td class="rank">
+          
+        </td>
+        <td>
+          <%= number_field_tag 'time[]', '0', :min => 0, :max => 90 %>
+        </td>
+        <td>
+          <%= select_tag 'category_', options_from_collection_for_select(@categories, :id, :name), include_blank: '-'  %>
+        </td>
+        <td>
+          <%= select_tag 'practice_content_id[]', options_for_select("-" => "") %>
+        </td>
+        <td id='estimated_time_'>
+        </td>     
+        <td id='head_count_'>
+        </td> 
+        <td>
+          <%= text_area_tag 'concept_', '', :readonly => true,style:"border:none;"%>
+        </td>
+        <td>
+          <%= button_tag '-',id:'remove_',type: 'button' %>
+        </td>
+      </tr>
+
+      <% if edit_flg.present? %>
+        <%= hidden_field_tag :edit %>
+        <% @practice_menu.each do |attribute| %>
+          <tr id='row_'>
+            <td class="rank">
+              <%= attribute.order %>
+            </td>
+            <td>
+              <%= number_field_tag 'time[]', attribute.time, :min => 0, :max => 90, id: "time_#{attribute.order}" %>
+            </td>
+            <td>
+              <%= select_tag 'category_', options_from_collection_for_select(@categories, :id, :name, attribute.category_id), include_blank: '-', id: "category_#{attribute.order}"  %>
+            </td>
+            <td>
+              <%= select_tag 'practice_content_id[]', options_from_collection_for_select(Category.find(attribute.category_id).practice_contents, :id, :practice_name, attribute.id), include_blank: '-', id: "practice_content_id_#{attribute.order}" %>
+            </td>
+            <td id=<%= "estimated_time_#{attribute.order}" %>>
+              <%= attribute.estimated_time %>
+            </td>     
+            <td id=<%= "head_count_#{attribute.order}" %>>
+              <%= attribute.head_count %>
+            </td> 
+            <td>
+              <%= text_area_tag 'concept_', attribute.concept, :readonly => true, id: "concept_#{attribute.order}",style:"border:none;" %>
+            </td>
+            <td>
+              <%= button_tag '-',id:"remove_#{attribute.order}",type: 'button' %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+    <tbody>
+      <tr >
+        <td colspan=3 id="total" style="border-style: none;font-weight: bold;">
+        </td>
+        <td colspan=5 style="border-style: none;">
+          <span style="float: right;"><%= button_tag '+',id:'append',type: 'button' %></span>
+          <%= hidden_field_tag :row, '0' %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="form-actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>
+

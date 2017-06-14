@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+#error_explanation h2 {
+  color: red;
+}
+
+#error_explanation ul li {
+  color: red;
+}

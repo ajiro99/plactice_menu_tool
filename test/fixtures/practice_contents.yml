@@ -4,8 +4,10 @@ one:
   category_id: 
   practice_name: MyString
   head_count: MyString
-  estimated_time: 1
-  content: MyText
+  estimated_time: MyString
+  concept: MyString
+  rule: MyString
+  remarks: MyText
   strength: 1
   url: MyString
 
@@ -13,7 +15,9 @@ two:
   category_id: 
   practice_name: MyString
   head_count: MyString
-  estimated_time: 1
-  content: MyText
+  estimated_time: MyString
+  concept: MyString
+  rule: MyString
+  remarks: MyText
   strength: 1
   url: MyString

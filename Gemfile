@@ -47,3 +47,4 @@ end
 
 gem 'administrate', "~> 0.3.0"
 gem 'bourbon'
+gem 'jquery-ui-rails'

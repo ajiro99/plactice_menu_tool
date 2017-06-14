@@ -24,13 +24,11 @@ class CategoryDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :description,
-    :created_at,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :id,
     :name,
     :description,
     :created_at,
@@ -48,7 +46,7 @@ class CategoryDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how categories are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(category)
-  #   "Category ##{category.id}"
-  # end
+  def display_resource(category)
+    "Category ID:#{category.id}"
+  end
 end
